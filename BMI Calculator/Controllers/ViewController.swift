@@ -21,7 +21,6 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    
     @IBAction func heightSliderChanged(_ sender: UISlider) {
         let format = String(format: "%.1f", sender.value)
         heightLabel.text = format + "m"
@@ -33,10 +32,18 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculateClicked(_ sender: UIButton) {
+    
+        
+        self.performSegue(withIdentifier: "toDetailView", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let height = heightSlider.value
         let weight = weightSlider.value
         let bmi = weight / (height * height)
         print (bmi)
+        let vc = segue.destination as! DetailViewController
+        vc.bmi = bmi
     }
 }
 

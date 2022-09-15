@@ -13,11 +13,13 @@ class DetailViewController : UIViewController {
     @IBOutlet weak var bmiLabel: UILabel!
     @IBOutlet weak var bmiMessageLabel: UILabel!
     
-    var bmi = Float()
+    var bmi : BmiData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bmiLabel.text = String(format: "%0.1f", bmi)
+        bmiLabel.text = String(format: "%0.1f", bmi?.value ?? 0.0)
+        bmiMessageLabel.text = bmi?.advice ?? "I don't know"
+        view.backgroundColor = bmi?.color ?? .yellow
     }
     
     @IBAction func recalculateClicked(_ sender: Any) {

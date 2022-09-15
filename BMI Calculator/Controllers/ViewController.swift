@@ -16,34 +16,29 @@ class ViewController: UIViewController {
     @IBOutlet weak var heightSlider: UISlider!
     @IBOutlet weak var weightSlider: UISlider!
     
+    var calculatorBrain = CalculatorBrain()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func heightSliderChanged(_ sender: UISlider) {
-        let format = String(format: "%.1f", sender.value)
-        heightLabel.text = format + "m"
+        heightLabel.text = calculatorBrain.formatHeight(height: sender.value)
     }
     
     @IBAction func weightSliderChanged(_ sender: UISlider) {
-        let format = String(format: "%.1f", sender.value)
-        weightLabel.text = format + "Kg"
+        weightLabel.text = calculatorBrain.formatWeight(weight: sender.value)
     }
     
     @IBAction func calculateClicked(_ sender: UIButton) {
-    
-        
         self.performSegue(withIdentifier: "toDetailView", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let height = heightSlider.value
         let weight = weightSlider.value
-        let bmi = weight / (height * height)
-        print (bmi)
         let vc = segue.destination as! DetailViewController
-        vc.bmi = bmi
+        vc.bmi = calculatorBrain.calculateBmi(weight: weight, height: height)
     }
 }
 

@@ -20,7 +20,6 @@ class DetailViewController : UIViewController {
         bmiLabel.text = String(format: "%0.1f", bmi)
     }
     
-    
     @IBAction func recalculateClicked(_ sender: Any) {
         dismiss(animated: true)
     }
